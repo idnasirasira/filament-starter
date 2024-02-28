@@ -38,16 +38,15 @@ class StateResource extends Resource
                     ->maxLength(2),
                 Forms\Components\TextInput::make('fips_code')
                     ->required()
-                    ->maxLength(2),
+                    ->maxLength(3),
                 Forms\Components\TextInput::make('iso2')
                     ->required()
-                    ->maxLength(2),
+                    ->maxLength(3),
 
                 Forms\Components\TextInput::make('latitude')
                     ->required(),
                 Forms\Components\TextInput::make('longitude')
-                    ->required()
-                    ->maxLength(3),
+                    ->required(),
                 Forms\Components\Checkbox::make('flag'),
                 Forms\Components\Select::make('country_id')
                     ->label('Country')
@@ -65,7 +64,26 @@ class StateResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('country_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('country_code')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('fips_code')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('iso2')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('latitude')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('longitude')
+                    ->sortable(),
+                Tables\Columns\BooleanColumn::make('flag')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 //
