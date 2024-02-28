@@ -45,7 +45,17 @@ class CityResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->label('City Name')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('state.name')
+                    ->label('State Name')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault:false),
             ])
             ->filters([
                 //

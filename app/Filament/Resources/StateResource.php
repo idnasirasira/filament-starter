@@ -64,27 +64,25 @@ class StateResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('country_id')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('country.name')
+                    ->label('Country Name')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('State Name')
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('country_code')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('fips_code')
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('iso2')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('latitude')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('longitude')
                     ->sortable(),
                 Tables\Columns\BooleanColumn::make('flag')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
-            ])
+            ])->defaultSort('country.name')
             ->filters([
                 //
             ])
