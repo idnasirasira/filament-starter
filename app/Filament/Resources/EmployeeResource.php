@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\EmployeeResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\EmployeeResource\RelationManagers;
+use Filament\Tables\Filters\SelectFilter;
 
 class EmployeeResource extends Resource
 {
@@ -126,7 +127,11 @@ class EmployeeResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('Department')
+                    ->native(false)
+                    ->preload()
+                    ->searchable()
+                    ->relationship('department', 'name'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
