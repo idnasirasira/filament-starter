@@ -24,6 +24,8 @@ class ListEmployees extends ListRecords
         return [
             'All' => Tab::make(),
             'This Week' => Tab::make()->modifyQueryUsing(fn (Builder $query) => $query->where('date_hired', '>=', now()->subWeek())),
+            'This Month' => Tab::make()->modifyQueryUsing(fn (Builder $query) => $query->where('date_hired', '>=', now()->subMonth())),
+            'This Year' => Tab::make()->modifyQueryUsing(fn (Builder $query) => $query->where('date_hired', '>=', now()->subYear())),
         ];
     }
 }
