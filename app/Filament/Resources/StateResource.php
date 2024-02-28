@@ -33,8 +33,27 @@ class StateResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
+                Forms\Components\TextInput::make('country_code')
+                    ->required()
+                    ->maxLength(2),
+                Forms\Components\TextInput::make('fips_code')
+                    ->required()
+                    ->maxLength(2),
+                Forms\Components\TextInput::make('iso2')
+                    ->required()
+                    ->maxLength(2),
+
+                Forms\Components\TextInput::make('latitude')
+                    ->required(),
+                Forms\Components\TextInput::make('longitude')
+                    ->required()
+                    ->maxLength(3),
+                Forms\Components\Checkbox::make('flag'),
                 Forms\Components\Select::make('country_id')
                     ->label('Country')
+                    ->native(false)
+                    ->searchable(true)
+                    ->preload()
                     ->options(
                         \App\Models\Country::pluck('name', 'id')->toArray()
                     )

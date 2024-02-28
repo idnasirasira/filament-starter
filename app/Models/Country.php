@@ -12,4 +12,8 @@ class Country extends Model
     protected $fillable = [
         'name'
     ];
+
+    function states() {
+        return $this->hasMany(State::class);
+    }
 }

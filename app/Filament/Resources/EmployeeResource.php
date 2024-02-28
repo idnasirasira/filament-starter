@@ -2,16 +2,19 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\EmployeeResource\Pages;
-use App\Filament\Resources\EmployeeResource\RelationManagers;
-use App\Models\Employee;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
+use App\Models\Employee;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\EmployeeResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\EmployeeResource\RelationManagers;
 
 class EmployeeResource extends Resource
 {
@@ -42,22 +45,31 @@ class EmployeeResource extends Resource
                     ->schema([
                         Forms\Components\Select::make('country_id')
                             ->label('Country')
-                            ->options(
-                                \App\Models\Country::pluck('name', 'id')->toArray()
-                            )
+                            ->relationship(name: 'country', titleAttribute: 'name')
+                            ->searchable()
+                            ->preload()
+                            ->live()
+                            ->afterStateUpdated(fn (Set $set) => $set('state_id', null))
+                            ->native(false)
                             ->required(),
                         Forms\Components\Select::make('state_id')
                             ->label('State')
-                            ->options(
-                                \App\Models\State::pluck('name', 'id')->toArray()
-                            )
+                            ->options(fn (Get $get): Collection => \App\Models\State::query()
+                                ->where('country_id', $get('country_id'))
+                                ->get()
+                                ->pluck('name', 'id'))
+                            ->searchable()
+                            ->native(false)
+                            ->live()
+                            ->afterStateUpdated(fn (Set $set) => $set('city_id', null))
                             ->required(),
                         Forms\Components\Select::make('city_id')
-                            ->label('State')
-                            ->options(
-                                \App\Models\City::pluck('name', 'id')->toArray()
-                            )
-                            ->required(),
+                            ->options(fn (Get $get): Collection => \App\Models\City::query()
+                                ->where('state_id', $get('state_id'))
+                                ->get()
+                                ->pluck('name', 'id'))
+                            ->searchable()
+                            ->native(false),
                         Forms\Components\TextInput::make('address')->required()->maxLength(255),
                         Forms\Components\TextInput::make('zip_code')->required()->maxLength(255),
                     ])->columns(3),

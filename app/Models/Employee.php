@@ -22,4 +22,26 @@ class Employee extends Model
         'city_id',
         'department_id',
     ];
+
+    protected $guarded = [];
+
+    function department() {
+        return $this->belongsTo(Department::class);
+    }
+
+    function country() {
+        return $this->belongsTo(Country::class);
+    }
+
+    function state() {
+        return $this->belongsTo(State::class);
+    }
+
+    function city() {
+        return $this->belongsTo(City::class);
+    }
+
+    function user() {
+        return $this->belongsTo(User::class);
+    }
 }
