@@ -79,8 +79,10 @@ class EmployeeResource extends Resource
                 Forms\Components\Section::make('Important Dates')
                     ->schema([
                         Forms\Components\DatePicker::make('date_of_birth')
+                            ->native(false)
                             ->required(),
                         Forms\Components\DatePicker::make('date_hired')
+                            ->native(false)
                             ->required(),
                     ])->columns(2),
 
@@ -88,6 +90,9 @@ class EmployeeResource extends Resource
                     ->schema([
                         Forms\Components\Select::make('department_id')
                             ->label('State')
+                            ->native(false)
+                            ->preload()
+                            ->searchable()
                             ->options(
                                 \App\Models\Department::pluck('name', 'id')->toArray()
                             )
