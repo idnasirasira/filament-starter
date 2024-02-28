@@ -131,6 +131,8 @@ class EmployeeResource extends Resource
                     ->native(false)
                     ->preload()
                     ->searchable()
+                    ->label('Filter by Department')
+                    ->indicator('Department')
                     ->relationship('department', 'name'),
             ])
             ->actions([
