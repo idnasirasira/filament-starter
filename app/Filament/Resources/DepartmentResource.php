@@ -37,7 +37,13 @@ class DepartmentResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('employees_count')
+                    ->label('Total Employees')
+                    ->counts('employees'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->sortable(),
             ])
             ->filters([
                 //
