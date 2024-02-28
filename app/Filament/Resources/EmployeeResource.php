@@ -49,7 +49,10 @@ class EmployeeResource extends Resource
                             ->searchable()
                             ->preload()
                             ->live()
-                            ->afterStateUpdated(fn (Set $set) => $set('state_id', null))
+                            ->afterStateUpdated(function (Set $set) {
+                                $set('state_id', null);
+                                $set('city_id', null);
+                            })
                             ->native(false)
                             ->required(),
                         Forms\Components\Select::make('state_id')
