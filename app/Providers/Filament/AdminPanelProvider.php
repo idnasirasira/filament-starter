@@ -31,6 +31,11 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->navigationGroups([
+                'Employee Management',
+                'System Management',
+                'User Management',
+            ])
             ->colors([
                 'danger' => Color::Rose,
                 'gray' => Color::Gray,
