@@ -1,9 +1,8 @@
 <?php
-namespace App\Filament\Pages\Tenancy;
+namespace App\Filament\App\Pages\Tenancy;
  
 use App\Models\Team;
 use Filament\Forms\Form;
-use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\Tenancy\RegisterTenant;
  
