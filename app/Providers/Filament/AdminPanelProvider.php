@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Http\Middleware\VerifyIsAdmin;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
@@ -72,6 +73,7 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                VerifyIsAdmin::class,
             ]);
     }
 }

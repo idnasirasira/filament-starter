@@ -7,7 +7,9 @@ use Filament\Panel;
 use App\Models\Team;
 use Filament\Widgets;
 use Filament\PanelProvider;
+use Filament\Navigation\MenuItem;
 use Filament\Support\Colors\Color;
+use Illuminate\Support\Facades\Auth;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
 use App\Filament\App\Pages\Tenancy\RegisterTeam;
@@ -18,7 +20,6 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Navigation\MenuItem;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 
@@ -36,7 +37,7 @@ class AppPanelProvider extends PanelProvider
                     ->label('Admin')
                     ->icon('heroicon-o-cog-6-tooth')
                     ->url('/admin')
-                    ->visible(fn (): bool => auth()->user()->isAdmin()),
+                    ->visible(fn (): bool => Auth::user()->is_admin),
             ])
             ->colors([
                 'danger' => Color::Red,
