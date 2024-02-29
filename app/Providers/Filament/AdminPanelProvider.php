@@ -15,6 +15,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 
@@ -27,10 +28,16 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('Idnasirasira')
             ->brandLogo(fn () => view('filament.admin.logo'))
             ->brandLogoHeight('3rem')
+            ->profile()
+            ->userMenuItems([
+                MenuItem::make()
+                    ->label('Dashboard')
+                    ->icon('heroicon-o-cog-6-tooth')
+                    ->url('/app'),
+            ])
             ->favicon(asset('images/favicon.ico'))
             ->id('admin')
             ->path('admin')
-            ->login()
             ->navigationGroups([
                 'Employee Management',
                 'System Management',
@@ -65,9 +72,6 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-            ])
-            ->authMiddleware([
-                Authenticate::class,
             ]);
     }
 }
