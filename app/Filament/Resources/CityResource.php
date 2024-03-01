@@ -56,7 +56,7 @@ class CityResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault:false),
+                    ->toggleable(isToggledHiddenByDefault: false),
             ])
             ->filters([
                 //

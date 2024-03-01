@@ -12,7 +12,7 @@ class EmployeeAdminChart extends ChartWidget
     protected static ?string $heading = 'Chart';
 
     protected static ?int $sort = 1;
-    
+
     protected function getData(): array
     {
         $data = Trend::model(Employee::class)

@@ -43,12 +43,12 @@ class EmployeeResource extends Resource
         return ['first_name', 'last_name', 'middle_name'];
     }
 
-    public static function getNavigationBadge(): ?string 
+    public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
     }
 
-    public static function getNavigationBadgeColor(): string|array|null 
+    public static function getNavigationBadgeColor(): string|array|null
     {
         return 'warning';
     }
@@ -180,15 +180,15 @@ class EmployeeResource extends Resource
                     })
                     ->indicateUsing(function (array $data): array {
                         $indicators = [];
- 
+
                         if ($data['created_from'] ?? null) {
                             $indicators['created_from'] = 'Created from ' . Carbon::parse($data['created_from'])->toFormattedDateString();
                         }
-                
+
                         if ($data['created_until'] ?? null) {
                             $indicators['created_until'] = 'Created until ' . Carbon::parse($data['created_until'])->toFormattedDateString();
                         }
-                
+
                         return $indicators;
                     })
                     ->columnSpan(2)
@@ -203,7 +203,7 @@ class EmployeeResource extends Resource
                             ->success()
                             ->title('Employee Deleted')
                             ->body('The Employee deleted successfully.')
-                ),
+                    ),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

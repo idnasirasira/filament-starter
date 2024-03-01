@@ -36,11 +36,13 @@ class Country extends Model
         'wikiDataId',
     ];
 
-    function states() {
+    function states()
+    {
         return $this->hasMany(State::class);
     }
 
-    function employees() {
+    function employees()
+    {
         return $this->hasMany(Employee::class);
     }
 }

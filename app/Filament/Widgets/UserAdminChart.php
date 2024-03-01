@@ -10,7 +10,7 @@ use Flowframe\Trend\TrendValue;
 class UserAdminChart extends ChartWidget
 {
     protected static ?string $heading = 'Chart';
-    
+
     protected static ?int $sort = 2;
 
     protected function getData(): array

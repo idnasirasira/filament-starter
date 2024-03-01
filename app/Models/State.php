@@ -20,15 +20,18 @@ class State extends Model
         'flag',
     ];
 
-    function country() {
+    function country()
+    {
         return $this->belongsTo(Country::class);
     }
 
-    function cities() {
+    function cities()
+    {
         return $this->hasMany(City::class);
     }
 
-    function employees() {
+    function employees()
+    {
         return $this->hasMany(Employee::class);
     }
 }

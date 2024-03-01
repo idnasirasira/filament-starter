@@ -14,11 +14,13 @@ class City extends Model
         'state_id',
     ];
 
-    function state() {
+    function state()
+    {
         return $this->belongsTo(State::class);
     }
 
-    function employees() {
+    function employees()
+    {
         return $this->hasMany(Employee::class);
     }
 }

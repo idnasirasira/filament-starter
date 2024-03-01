@@ -121,7 +121,8 @@ class StateResource extends Resource
         ];
     }
 
-    public static function infolist(Infolist $infolist) : Infolist {
+    public static function infolist(Infolist $infolist): Infolist
+    {
         return $infolist->schema([
             Section::make('State Info')->schema([
                 TextEntry::make('country.name')
@@ -131,5 +132,4 @@ class StateResource extends Resource
             ])->columns(2),
         ]);
     }
-    
 }
